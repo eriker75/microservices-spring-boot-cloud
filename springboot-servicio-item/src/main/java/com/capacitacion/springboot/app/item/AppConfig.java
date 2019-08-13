@@ -10,6 +10,7 @@ public class AppConfig {
  	
 	/**
 	 * Crea un cliente API REST para conectar con otros servicios
+	 * 
 	 * @return
 	 */
 	@Bean("clienteRest")
