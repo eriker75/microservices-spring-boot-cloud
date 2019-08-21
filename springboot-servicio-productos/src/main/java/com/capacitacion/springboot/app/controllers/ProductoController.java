@@ -35,15 +35,15 @@ public class ProductoController {
 		Producto producto = productoService.findById(id);
 		producto.setPort(port);
 	
-		
 		/**
-		 * Dejamos como modo de prueba para que probemos si un servicio está disponible
-		 * try {
-			Thread.sleep(2000L);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}**/
+		 * Para probar configuración de manejo de tolerancia en las configuraciones
+		 * de los microservicios: application.properties
+			try {
+				Thread.sleep(2000L);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		 **/
 		
 		return producto;
 	}
