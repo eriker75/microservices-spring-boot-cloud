@@ -4,16 +4,31 @@ import java.util.List;
 
 import com.capacitacion.springboot.app.productos.models.entity.Producto;
 
+/**
+ * @author joliveira
+ *
+ */
 public interface IProductoService {
 
 	/**
 	 * @return
 	 */
 	public List<Producto> findAll();
+
 	/**
 	 * @param id
 	 * @return
 	 */
 	public Producto findById(Long id);
 	
+	/**
+	 * @param producto
+	 * @return
+	 */
+	public Producto save(Producto producto);
+	
+	/**
+	 * @param id
+	 */
+	public void deleteById(Long id);
 }

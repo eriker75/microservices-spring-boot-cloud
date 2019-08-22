@@ -9,6 +9,10 @@ import org.springframework.transaction.annotation.Transactional;
 import com.capacitacion.springboot.app.productos.models.dao.ProductoDao;
 import com.capacitacion.springboot.app.productos.models.entity.Producto;
 
+/**
+ * @author joliveira
+ *
+ */
 @Service
 public class ProductoServiceImpl implements IProductoService{
 
@@ -29,6 +33,24 @@ public class ProductoServiceImpl implements IProductoService{
 	 */
 	public Producto findById(Long id) {
 		return productoDao.findById(id).orElse(null);
+	}
+
+	/* (non-Javadoc)
+	 * @see com.capacitacion.springboot.app.productos.models.service.IProductoService#save(com.capacitacion.springboot.app.productos.models.entity.Producto)
+	 */
+	@Override
+	@Transactional
+	public Producto save(Producto producto) {
+		return productoDao.save(producto);
+	}
+
+	/* (non-Javadoc)
+	 * @see com.capacitacion.springboot.app.productos.models.service.IProductoService#deleteById(java.lang.Long)
+	 */
+	@Override
+	@Transactional
+	public void deleteById(Long id) {
+		productoDao.deleteById(id);
 	}
 
 	
