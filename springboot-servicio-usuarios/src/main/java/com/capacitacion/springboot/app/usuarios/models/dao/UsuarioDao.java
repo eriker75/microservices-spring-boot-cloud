@@ -2,6 +2,7 @@ package com.capacitacion.springboot.app.usuarios.models.dao;
 
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 import com.capacitacion.springboot.app.usuarios.models.entity.Usuario;
 
@@ -9,6 +10,7 @@ import com.capacitacion.springboot.app.usuarios.models.entity.Usuario;
  * @author joliveira
  *
  */
+@RepositoryRestResource(path="usuarios")
 public interface UsuarioDao extends PagingAndSortingRepository<Usuario, Long> {
 
 	/**
