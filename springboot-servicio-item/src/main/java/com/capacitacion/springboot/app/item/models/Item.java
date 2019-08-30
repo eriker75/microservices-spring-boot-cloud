@@ -3,7 +3,7 @@ package com.capacitacion.springboot.app.item.models;
 import com.capacitacion.springboot.app.commons.modes.entity.Producto;
 
 /**
- * @author joliveiraimport com.capacitacion.springboot.app.commons.modes.entity.Producto;
+ * @author joliveira 
  *
  */
 public class Item {
