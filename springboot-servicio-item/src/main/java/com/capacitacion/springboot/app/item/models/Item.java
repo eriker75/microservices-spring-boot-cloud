@@ -1,7 +1,9 @@
 package com.capacitacion.springboot.app.item.models;
 
+import com.capacitacion.springboot.app.commons.modes.entity.Producto;
+
 /**
- * @author joliveira
+ * @author joliveiraimport com.capacitacion.springboot.app.commons.modes.entity.Producto;
  *
  */
 public class Item {

@@ -3,7 +3,7 @@ package com.capacitacion.springboot.app.item.models.service;
 import java.util.List;
 
 import com.capacitacion.springboot.app.item.models.Item;
-import com.capacitacion.springboot.app.item.models.Producto;
+import com.capacitacion.springboot.app.commons.modes.entity.Producto;
 
 /**
  * @author joliveira
