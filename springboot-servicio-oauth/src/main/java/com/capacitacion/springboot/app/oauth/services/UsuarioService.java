@@ -12,10 +12,12 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
 
 import com.capacitacion.springboot.app.oauth.clients.UsuarioFeignClient;
 import com.capacitacion.springboot.app.usuarios.commons.models.entity.Usuario;
 
+@Service
 public class UsuarioService implements UserDetailsService{
 
 	private Logger log = LoggerFactory.getLogger(UsuarioService.class);
@@ -36,7 +38,10 @@ public class UsuarioService implements UserDetailsService{
 		List<GrantedAuthority> authorities = usuario.getRoles()
 											.stream()
 											.map(role -> new SimpleGrantedAuthority(role.getNombre()))
+											.peek(authority -> log.info("Role: " + authority.getAuthority()))
 											.collect(Collectors.toList());
+		
+		log.info("Usuario autenticado: " + username);
 		
 		return new User(usuario.getUsername(), 
 						usuario.getPassword(),
