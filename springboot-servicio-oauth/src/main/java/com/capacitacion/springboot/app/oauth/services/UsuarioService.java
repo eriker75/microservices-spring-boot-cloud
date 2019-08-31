@@ -22,8 +22,12 @@ public class UsuarioService implements UserDetailsService{
 
 	private Logger log = LoggerFactory.getLogger(UsuarioService.class);
 	
+	/**
+	 * Cliente Rest Feign responsable de conectarse al microservice de Usuarios 
+	 */
 	@Autowired
 	private UsuarioFeignClient client;
+	
 	
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		Usuario usuario = client.findByUsername(username);
