@@ -25,6 +25,9 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter{
 		return new BCryptPasswordEncoder();
 	}
 	
+	/* 
+	 * Responsable por llamar método de encriptación para validar contraseña
+	 */
 	@Override
 	@Autowired
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
