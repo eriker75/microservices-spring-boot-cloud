@@ -23,14 +23,38 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 	@Autowired
 	private AuthenticationManager authenticationManager;
 
+	/* 
+	 * Define los permisos que van a tener nuestros servicios Endpoints
+	 * para generar y validar token
+	 */
 	@Override
 	public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
-		super.configure(security);
+		// Con permitAll cualquier usuario inclusive puede acceder a la ruta para generar Token
+		security.checkTokenAccess("permitAll")
+				.checkTokenAccess("isAuthenticated()"); 
+				//isAuthenticated: Header Authorization Basic: client id, client secret
+				// ? : para usar Bearer
 	}
 
+	/* 
+	 * Configura los clientes que tienen permiso a nuestra aplicación REST
+	 */
 	@Override
 	public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-		super.configure(clients);
+		clients.inMemory()
+			.withClient("frontendapp")
+			.secret(passwordEncoder.encode("12345"))
+			.scopes("read", "write")
+			.authorizedGrantTypes("password", "refresh_token") //authorization_code redireccionamiento sin la necesidad de usuario y contraseña
+			.accessTokenValiditySeconds(3600)
+			.refreshTokenValiditySeconds(3600)
+			.and()
+			.withClient("androidapp")
+			.secret(passwordEncoder.encode("12345"))
+			.scopes("read", "write")
+			.authorizedGrantTypes("password", "refresh_token") //authorization_code redireccionamiento sin la necesidad de usuario y contraseña
+			.accessTokenValiditySeconds(3600)
+			.refreshTokenValiditySeconds(3600);
 	}
 
 	/* 
