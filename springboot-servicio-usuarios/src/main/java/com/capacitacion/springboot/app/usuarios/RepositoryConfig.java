@@ -11,8 +11,6 @@ import com.capacitacion.springboot.app.usuarios.models.entity.Usuario;
 public class RepositoryConfig implements RepositoryRestConfigurer{
 
 	public void configureRepositoryRestConfiguration(RepositoryRestConfiguration config) {
-		config.exposeIdsFor(Usuario.class, Role.class);
+		config.exposeIdsFor(Usuario.class, Role.class);		
 	}
-	
-		
 }
