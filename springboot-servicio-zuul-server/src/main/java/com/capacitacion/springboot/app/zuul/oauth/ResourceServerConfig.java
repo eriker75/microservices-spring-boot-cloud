@@ -1,5 +1,7 @@
 package com.capacitacion.springboot.app.zuul.oauth;
 
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -10,13 +12,17 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Res
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 
+@RefreshScope
 @Configuration
 @EnableResourceServer
 public class ResourceServerConfig extends ResourceServerConfigurerAdapter{
 
 	private static final String ROLE_ADMIN = "ADMIN";
 	private static final String ROLE_USER = "USER";
-	
+		
+	@Value("${config.security.oauth.jwt.key}")
+	private String jwtKey;
+		
 	/* 
 	 * Configuraciones relacionadas al Token
 	 */
@@ -55,7 +61,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter{
 		JwtAccessTokenConverter tokenConverter = new JwtAccessTokenConverter();
 		
 		// @ TODO hacer que la clave de seguridad del token sea consumida del servicio de configuración
-		tokenConverter.setSigningKey("temp_secret_code");
+		tokenConverter.setSigningKey(jwtKey);
 		return tokenConverter;
 	}
 }
