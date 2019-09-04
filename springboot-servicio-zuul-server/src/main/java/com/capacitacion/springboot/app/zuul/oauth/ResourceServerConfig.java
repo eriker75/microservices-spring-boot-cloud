@@ -41,9 +41,8 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter{
 		http.authorizeRequests().antMatchers("/api/security/oauth/**").permitAll()
 			.antMatchers(HttpMethod.GET, "/api/productos/listar", "/api/items/listar", "/api/usuarios/usuarios").permitAll()
 			.antMatchers(HttpMethod.GET, "/api/productos/ver/{id}", "/api/items/ver/{id}/cantidad/{cantidad}", "/api/usuarios/usuarios/{id}").hasAnyRole(ROLE_ADMIN, ROLE_USER)
-			.antMatchers(HttpMethod.POST, "/api/productos/crear", "/api/items/crear", "/api/usuarios/usuarios").hasRole(ROLE_ADMIN)
-			.antMatchers(HttpMethod.PUT, "/api/productos/editar/{id}", "/api/items/editar/{id}", "/api/usuarios/usuarios/{id}").hasRole(ROLE_ADMIN)
-			.antMatchers(HttpMethod.DELETE, "/api/productos/editar/{id}", "/api/items/editar/{id}", "/api/usuarios/usuarios/{id}").hasRole(ROLE_ADMIN);
+			.antMatchers("/api/productos/**", "/api/items/**", "/api/usuarios/**").hasRole(ROLE_ADMIN)
+			.anyRequest().authenticated();
 	}
 		
 	@Bean
