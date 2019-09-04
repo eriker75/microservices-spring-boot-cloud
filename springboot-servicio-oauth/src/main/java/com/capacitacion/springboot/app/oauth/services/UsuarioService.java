@@ -63,9 +63,11 @@ public class UsuarioService implements IUsuarioService, UserDetailsService{
 	}
 
 
+	/* 
+	 * Busca detalles del usuario comunicandose con el microservicio de Usuarios
+	 */
 	@Override
-	public Usuario findAllUserInfoByUsername(String username) {
-		
+	public Usuario findAllUserInfoByUsername(String username) {		
 		return client.findByUsername(username);
 	}	
 }
