@@ -9,6 +9,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import com.capacitacion.springboot.app.oauth.security.event.AuthenticationSuccessErrorHandler;
+
 /**
  * Clase responsable por las configuraciones relacionados a Spring Security con OAuth
  * @author joliveira
@@ -19,6 +21,9 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter{
 	
 	@Autowired
 	private UserDetailsService usuarioService;
+	
+	@Autowired
+	private AuthenticationSuccessErrorHandler eventPublisher;
 
 	@Bean
 	public BCryptPasswordEncoder passwordEncoder() {
@@ -31,7 +36,8 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter{
 	@Override
 	@Autowired
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		auth.userDetailsService(this.usuarioService).passwordEncoder(passwordEncoder());
+		auth.userDetailsService(this.usuarioService).passwordEncoder(passwordEncoder())
+			.and().authenticationEventPublisher(eventPublisher);
 	}
 
 	@Override
