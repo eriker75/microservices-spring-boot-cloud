@@ -66,6 +66,6 @@ public class UsuarioService implements IUsuarioService, UserDetailsService{
 	@Override
 	public Usuario findAllUserInfoByUsername(String username) {
 		
-		return null;
+		return client.findByUsername(username);
 	}	
 }

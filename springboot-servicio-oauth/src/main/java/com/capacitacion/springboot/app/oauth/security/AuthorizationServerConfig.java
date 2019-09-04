@@ -24,11 +24,11 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 	private BCryptPasswordEncoder passwordEncoder;
 	
 	@Autowired
-	private AuthenticationManager authenticationManager;
+	private InfoAdicionalToken infoAdicionalToken; 
 	
 	@Autowired
-	private InfoAdicionalToken infoAdicionalToken; 
-
+	private AuthenticationManager authenticationManager;
+	
 	/* 
 	 * Define los permisos que van a tener nuestros servicios Endpoints
 	 * para generar y validar token
