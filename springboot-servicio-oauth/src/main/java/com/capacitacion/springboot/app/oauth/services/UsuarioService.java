@@ -29,6 +29,9 @@ public class UsuarioService implements IUsuarioService, UserDetailsService{
 	private UsuarioFeignClient client;
 	
 	
+	/* 
+	 * Método que se debe implementar al usar Spring Security para obtener los datos del usuario
+	 */
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		Usuario usuario = client.findByUsername(username);
 		
@@ -47,6 +50,9 @@ public class UsuarioService implements IUsuarioService, UserDetailsService{
 		
 		log.info("Usuario autenticado: " + username);
 		
+		/**
+		 *  loadUserByUsername espera un tipo de clase UserDetails donde los roles son del tipo GrantAuthority authorities
+		 */
 		return new User(usuario.getUsername(), 
 						usuario.getPassword(),
 						usuario.getEnabled(),
