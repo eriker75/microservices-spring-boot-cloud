@@ -17,63 +17,59 @@ import org.springframework.stereotype.Service;
 import com.capacitacion.springboot.app.oauth.clients.UsuarioFeignClient;
 import com.capacitacion.springboot.app.usuarios.commons.models.entity.Usuario;
 
+import feign.FeignException;
+
 @Service
-public class UsuarioService implements IUsuarioService, UserDetailsService{
+public class UsuarioService implements IUsuarioService, UserDetailsService {
 
 	private Logger log = LoggerFactory.getLogger(UsuarioService.class);
-	
+
 	/**
-	 * Cliente Rest Feign responsable de conectarse al microservice de Usuarios 
+	 * Cliente Rest Feign responsable de conectarse al microservice de Usuarios
 	 */
 	@Autowired
 	private UsuarioFeignClient client;
-	
-	
-	/* 
-	 * Método que se debe implementar al usar Spring Security para obtener los datos del usuario
+
+	/*
+	 * Método que se debe implementar al usar Spring Security para obtener los datos
+	 * del usuario
 	 */
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		Usuario usuario = client.findByUsername(username);
-		
-		if(usuario == null) {
-			log.error("Error en el login, no existe el usuario '" + username + "' en el sistema");
-			throw new UsernameNotFoundException("Error en el login, no existe el usuario '" + username + "' en el sistema");
+
+		try {
+			Usuario usuario = client.findByUsername(username);
 			
+			// Lista de Roles en Spring Security es del tipo GrantedAuthority
+			List<GrantedAuthority> authorities = usuario.getRoles().stream()
+					.map(role -> new SimpleGrantedAuthority(role.getNombre()))
+					.peek(authority -> log.info("Role: " + authority.getAuthority())).collect(Collectors.toList());
+
+			log.info("Usuario autenticado: " + username);
+
+			/**
+			 * loadUserByUsername espera un tipo de clase UserDetails donde los roles son
+			 * del tipo GrantAuthority authorities
+			 */
+			return new User(usuario.getUsername(), usuario.getPassword(), usuario.getEnabled(), true, true, true,
+					authorities);
+
+		} catch (FeignException e) {
+			log.error("Error en el login, no existe el usuario '" + username + "' en el sistema");
+			throw new UsernameNotFoundException(
+					"Error en el login, no existe el usuario '" + username + "' en el sistema");
 		}
-		
-		// Lista de Roles en Spring Security es del tipo GrantedAuthority
-		List<GrantedAuthority> authorities = usuario.getRoles()
-											.stream()
-											.map(role -> new SimpleGrantedAuthority(role.getNombre()))
-											.peek(authority -> log.info("Role: " + authority.getAuthority()))
-											.collect(Collectors.toList());
-		
-		log.info("Usuario autenticado: " + username);
-		
-		/**
-		 *  loadUserByUsername espera un tipo de clase UserDetails donde los roles son del tipo GrantAuthority authorities
-		 */
-		return new User(usuario.getUsername(), 
-						usuario.getPassword(),
-						usuario.getEnabled(),
-						true,
-						true, 
-						true,
-						authorities);
 	}
 
-
-	/* 
+	/*
 	 * Busca detalles del usuario comunicandose con el microservicio de Usuarios
 	 */
 	@Override
-	public Usuario findAllUserInfoByUsername(String username) {		
+	public Usuario findAllUserInfoByUsername(String username) {
 		return client.findByUsername(username);
 	}
-
 
 	@Override
 	public Usuario update(Usuario usuario, Long id) {
 		return client.update(usuario, id);
-	}	
+	}
 }
