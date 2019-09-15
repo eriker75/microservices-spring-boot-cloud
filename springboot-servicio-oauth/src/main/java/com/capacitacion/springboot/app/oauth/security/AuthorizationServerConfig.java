@@ -54,14 +54,14 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 	@Override
 	public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
 		clients.inMemory()
-			.withClient(env.getProperty("config.security.oauth.client.id"))
+			.withClient(env.getProperty("config.security.oauth.client.id.angularapp"))
 			.secret(passwordEncoder.encode(env.getProperty("config.security.oauth.client.secret")))
 			.scopes("read", "write")
 			.authorizedGrantTypes("password", "refresh_token") //authorization_code redireccionamiento sin la necesidad de usuario y contraseña
 			.accessTokenValiditySeconds(3600)
 			.refreshTokenValiditySeconds(3600)
 			.and()
-			.withClient(env.getProperty("config.security.oauth.client.id"))
+			.withClient(env.getProperty("config.security.oauth.client.id.android"))
 			.secret(passwordEncoder.encode(env.getProperty("config.security.oauth.client.secret")))
 			.scopes("read", "write")
 			.authorizedGrantTypes("password", "refresh_token") //authorization_code redireccionamiento sin la necesidad de usuario y contraseña
@@ -92,9 +92,6 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 		return new JwtTokenStore(accessTokenConverter());
 	}
 
-	
-	// @ TODO hacer que la clave de seguridad del token sea consumida del servicio de configuración
-	
 	@Bean
 	public JwtAccessTokenConverter accessTokenConverter() {
 		JwtAccessTokenConverter tokenConverter = new JwtAccessTokenConverter();
