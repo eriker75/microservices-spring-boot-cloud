@@ -1,0 +1,29 @@
+version: '3'
+
+services:
+  postgres-spring-microservice:
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: "postgres"
+    ports:
+      - "15432:5432"
+    volumes:
+      - /pg-data:/var/lib/postgresql/data 
+    networks:
+      - postgres-compose-network
+      
+  pgadmin-spring-microservice:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "elephwebb@gmail.com"
+      PGADMIN_DEFAULT_PASSWORD: "postgres"
+    ports:
+      - "16543:80"
+    depends_on:
+      - postgres-spring-microservice
+    networks:
+      - postgres-spring-microservice-network
+
+networks: 
+  postgres-spring-microservice-network:
+    driver: bridge
