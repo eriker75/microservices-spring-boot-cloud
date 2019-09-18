@@ -3,7 +3,17 @@
 **Modulos que componenen la aplicación**
 
 
-**Levantando la aplicación**
+**Levantando el ambiente**
+
+
+```
+docker-compose -f docker-compose.yml up -d
+```
+
+
+RabbitMQ: localhost:15672
+Zipkin: localhost:9411
+
 
 
 
