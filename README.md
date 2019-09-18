@@ -12,7 +12,8 @@ docker-compose -f docker-compose.yml up -d
 
 
 RabbitMQ: localhost:15672
-Zipkin: localhost:9411
+Zipkin: localhost:9411 : http://localhost:9411/zipkin/
+
 
 
 
