@@ -2,6 +2,16 @@
 
 **Modulos que componenen la aplicación**
 
+- springboot-servicio-commons: Almacena la entidad Producto que es compartido entre los microservicios de Producto y de Item
+- springboot-servicio-config-server: utiliza Spring Cloud Config y concentra las configuraciones compartidas por todos los microservicios @EnableConfigServer
+- springboot-servicio-eureka-server: utiliza Spring Cloud Eureka se encarga de registrar los microservicios se define en @EnableEurekaServer en nuestro @SpringBootApplication
+- springboot-servicio-item: 
+- springboot-servicio-oauth: Utiliza Spring OAuth con Spring Security para la parte de Autenticación y Autorización.
+- springboot-servicio-productos:
+- springboot-servicio-usuarios:
+- springboot-servicio-usuarios-commons: Almacena entidades Usuario y Role compartidos por los microservicios Usuario y OAuth
+- springboot-servicio-zuul-server:
+
 
 **Levantando el ambiente**
 
@@ -28,9 +38,6 @@ RABBITMQ_USERNAME: user
 RABBITMQ_PASSWORD: bitnami
 
 
-Para manejar de manera más práctica los 
-
-
 ### Trazabilidad de los microservicios con Spring Cloud Sleuth y Monitoreo con Zipkin ###
 
 **TraceId**: identificador asociado a la petición que viaja entre los microservicios
@@ -46,6 +53,11 @@ INFO[microservicio, traceID, spanID, <Boolean> exportar a Zipkin]
 INFO[servicio-oauth, 8a40fc93ab4385007,f72188520726632d,false]
 
 
+
 ### ROADMAP ### 
 
+[] Crear tarea que se encarga de descargar todas las dependencias y correr mvn spring-boot:run
+[] Escribir pruebas unitarias y de integración dentro del contexto de microservicios
+[] Crear frontend usando Angular que consuma de nuestra estructura
+[] Deployar aplicación en Amazon AWS
 
