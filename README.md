@@ -13,13 +13,17 @@ docker-compose -f docker/rabbitmq/docker-compose.yml up -d
 ```
 
 
-RabbitMQ: localhost:15672
-Zipkin: localhost:9411
-PgAdmin: http://localhost:16543
-EurekaServer: http://localhost:8761
-RabbitMQ: http://localhost:15672/
+- RabbitMQ: localhost:15672
+- Zipkin: localhost:9411
+- PgAdmin: http://localhost:16543
+- EurekaServer: http://localhost:8761
+- RabbitMQ: http://localhost:15672/
 
-RabbitMQ
+
+### RabbitMQ - Middleware de mensajería que utiliza protocolo AMQP ###
+
+**AMQP** es un protocolo de estándar abierto en la capa de aplicaciones de un sistema de comunicación orientado a mensajes, encolamiento (queueing), enrutamiento (punta a punta con PubSub), exactitud y seguridad.
+
 RABBITMQ_USERNAME: user
 RABBITMQ_PASSWORD: bitnami
 
@@ -42,39 +46,6 @@ INFO[microservicio, traceID, spanID, <Boolean> exportar a Zipkin]
 INFO[servicio-oauth, 8a40fc93ab4385007,f72188520726632d,false]
 
 
-### TODO ###
-
-[] Crear un docker-compose.yml y ubicarlo dentro del módulo de microservicio-productos
-[] Instalar MySQL usando Docker - version 8 / buscar imagen oficial
-
-```docker-compose build```
-
-
-[] Crear un docker-compose.yml y ubicarlo dentro del módulo de microservicio-usuarios
-[] Instalar PostgreSQL usando Docker - version 10.9 
-```docker-compose build```
-
-
-[] Entrar al contenedor y crear base de datos
-o ejecutar un comando desde afuera del contenedor:
-
- ```docker exec -it [CONTAINER-NAME OR CONTAINER-ID] bash ```
-
-[] Modificar servicio-productos-desarrollo.properties con la IP del contenedor. 
-``` docker inspect [CONTAINER-NAME OR CONTAINER-ID] ```
-
-[] Modificar servicio-usuarios-desarrollo.properties con la IP del contenedor. 
-``` docker inspect [CONTAINER-NAME OR CONTAINER-ID] ```
-
-[] Instalar herramienta visual - Workbench y configurar la IP del contenedor
-[] Instalar herramienta visual pgAadmin y configurar la IP del contenedor
-
-### Investigación ### 
-
-[] Almacenar estructura del proyecto en un contenedor?
-[] Instalar y configurar portainer, verificando el estado de los contenedores
-[] Entender persistencia de los datos
-[] ¿Cómo llevar la estructura del proyecto a la nuven AWS? Documentar el proceso
-[] ¿Entender y configurar Kubernete y alternativas para la orquestación de los contenedores?
+### ROADMAP ### 
 
 
