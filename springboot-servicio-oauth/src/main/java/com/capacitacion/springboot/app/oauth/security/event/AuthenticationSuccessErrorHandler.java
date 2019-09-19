@@ -24,7 +24,7 @@ public class AuthenticationSuccessErrorHandler implements AuthenticationEventPub
 	private IUsuarioService usuarioService;
 	
 	@Autowired
-	private Tracer trace;
+	private Tracer tracer;
 
 	@Override
 	public void publishAuthenticationSuccess(Authentication authentication) {
