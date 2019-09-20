@@ -10,7 +10,7 @@ services:
     volumes:
       - /pg-data:/var/lib/postgresql/data 
     networks:
-      - postgres-spring-microservice-network
+      - spring-microservice-network
       
   pgadmin-spring-microservice:
     image: dpage/pgadmin4
@@ -22,8 +22,9 @@ services:
     depends_on:
       - postgres-spring-microservice
     networks:
-      - postgres-spring-microservice-network
+      - spring-microservice-network
 
 networks: 
-  postgres-spring-microservice-network:
+  spring-microservice-network:
     driver: bridge
+

@@ -32,6 +32,8 @@ services:
       # - SELF_TRACING_ENABLED=true
       # Uncomment to enable debug logging
       # - JAVA_OPTS=-Dlogging.level.zipkin2=DEBUG
+      # Register Zipkin as HabbitMQ client (consumer)
+      - RABBIT_ADDRESSES=localhost:5672
     ports:
       # Port used for the Zipkin UI and HTTP Api
       - 9411:9411
